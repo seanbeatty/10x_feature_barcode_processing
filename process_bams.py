@@ -19,7 +19,7 @@ def parse_read(sam_file_line):
     return out_dict['qname'], out_dict['cell_barcode'], out_dict['feature_barcode'], out_dict['feature_index']
 
 @click.command()
-@click.argument('bam_path', nargs=1)
+@click.argument('bam_path', nargs=1,type=click.Path(exists=True))
 @click.argument('out_path', nargs=1)
 def main(bam_path,out_path):
     samfile = pysam.AlignmentFile(bam_path, "rb") 
@@ -27,13 +27,10 @@ def main(bam_path,out_path):
         i = 1 
         lines = []
         for line in samfile:
-            #if(i < 10000000):
-            #    i += 1
             line_to_add = "\t".join(parse_read(line))
             line_to_add = line_to_add + "\n"
             the_file.write(line_to_add)
-            #else:
-            #    break
+
 
 
 
