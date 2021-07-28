@@ -14,9 +14,9 @@ def guide_cell_barcode_vs_all_cell_barcode(df_in, guide_in):
     return [str(guide_in), cells_with_guide, all_cells]
 
 @click.command()
-@click.argument('filename', type=click.Path(exists=True), nargs=1, help='file output from process_bams.py')
-@click.argument('filename_out', nargs=1,  help='filepath to be written to')
-@click.argument('guides_list', nargs=-1, help='space seperated guides to query')
+@click.argument('filename', type=click.Path(exists=True), nargs=1)
+@click.argument('filename_out', nargs=1)
+@click.argument('guides_list', nargs=-1)
 def main(filename, filename_out, guides_list):
     click.echo('Generating summary statistics for ' + str(filename))
     click.echo('For the guides ' + ", ".join(guides_list))
@@ -26,3 +26,6 @@ def main(filename, filename_out, guides_list):
     df_out.to_csv(filename_out, sep="\t")
 if __name__ == '__main__':
     main()
+
+
+    
